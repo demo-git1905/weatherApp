@@ -3,26 +3,41 @@ package com.tts.weatherapp.models;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+// @Entity
 public class Response {
+
+    // @Id
+    // @Column(name="responseid")
+    // private Long responseid;
     
     private Map<String, String> coord;
     private List<Map<String, String>> weather;
     private String base;
-    private Map<String, String> main;
+    public Map<String, String> main;
     private Map<String, String> wind;
     private String dt;
     private Map<String, String> sys;
     private String id;
-    private String name;
+    public String name;
     private String String;
+    private Map<String, String> clouds;
+    private String zipCode;
 
     public Response() {
     }
 
-    
+    public Map<String, String> getClouds() {
+        return clouds;
+    }
 
+    public void setClouds(Map<String, String> clouds) {
+        this.clouds = clouds;
+    }
 
-    
     public Map<String, String> getCoord() {
         return coord;
     }
@@ -103,11 +118,19 @@ public class Response {
         String = string;
     }
 
+
+    @Override
+    public String toString() {
+        return "Response [String=" + String + ", base=" + base + ", coord=" + coord + ", dt=" + dt + ", id=" + id
+                + ", main=" + main + ", name=" + name + ", sys=" + sys + ", weather=" + weather + ", wind=" + wind
+                + "]";
+    }
+
     public Response(Map<java.lang.String, java.lang.String> coord,
             List<Map<java.lang.String, java.lang.String>> weather, java.lang.String base,
             Map<java.lang.String, java.lang.String> main, Map<java.lang.String, java.lang.String> wind,
             java.lang.String dt, Map<java.lang.String, java.lang.String> sys, java.lang.String id,
-            java.lang.String name, java.lang.String string) {
+            java.lang.String name, java.lang.String string, Map<java.lang.String, java.lang.String> clouds) {
         this.coord = coord;
         this.weather = weather;
         this.base = base;
@@ -118,13 +141,15 @@ public class Response {
         this.id = id;
         this.name = name;
         String = string;
+        this.clouds = clouds;
     }
 
-    @Override
-    public String toString() {
-        return "Response [String=" + String + ", base=" + base + ", coord=" + coord + ", dt=" + dt + ", id=" + id
-                + ", main=" + main + ", name=" + name + ", sys=" + sys + ", weather=" + weather + ", wind=" + wind
-                + "]";
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     

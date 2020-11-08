@@ -8,38 +8,64 @@
     </head>
     <body>
         
-        
-        <!-- <div class="col-md-6 offset-md-3"> -->
+        Hello
+        <div class="col-md-6 offset-md-3">
+
             <br/>
             <h1 class="text-center">Get Your Local Forecast</h1>
             <form th:action="@{/}" th:object="${request}" method="post" autocomplete="off" >
                 <div class="form-group">
-                    <!-- <input type="text" th:field="*{zipCode}" placeholder="Zip Code" class="form-control"/> -->
+                    <input type="text" th:field="*{zipCode}" placeholder="Zip Code" class="form-control"/>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-md btn-primary btn-block" name="Submit" value="Submit" type="Submit">
                                                                                             Check Weather</button>
                 </div>
             </form>
-            <hr>
-            <h3>Forecast for <span th:text="${data.name}"></span></h3>
-     <!--        
-    <div class="container bg-light justify-content-center">
-        <div class="row">
-            <div class="col col-md-6 offset-md-3">
-                <br/>
-                <h3>Forecast for <span th:text="${data.name}"></span></h3>
-                <p><b>Temperature:</b> <span th:text="${data.main.get('temp')}"></span> °F</p>
-                <p><b>Cloud Cover:</b> <span th:text="${data.clouds.get('all')}"></span> %</p>
-                <p><b>Wind:</b> <span th:text="${data.wind.get('speed')}"></span> mph</p>
-                <p><b>Conditions:</b> <span th:text="${data.weather[0].get('description')}"></span>
-                    <img th:src="@{${'http://openweathermap.org/img/w/' 
-                    + data.weather[0].get('icon') + '.png'}}"></p>
-            </div>
-        </div>
-    </div>
 
-    </div> -->
+            <hr>
+
+            <div th:if="${data != null}">
+
+                <h3>Forecast for <span th:text="${data.name}"></span></h3>
+                
+
+                <div class="container bg-light justify-content-center"> 
+                    <div class="row">
+                        <div class="col col-md-6 offset-md-3">
+                            <br/>
+                            <h3>Forecast for <span th:text="${data.name}"></span></h3>
+                            <p><b>Temperature:</b> <span th:text="${data.main.get('temp')}"></span> °F</p>
+                            <p><b>Cloud Cover:</b> <span th:text="${data.clouds.get('all')}"></span> %</p>
+                            <p><b>Wind:</b> <span th:text="${data.wind.get('speed')}"></span> mph</p>
+                            <p><b>Conditions:</b> <span th:text="${data.weather[0].get('description')}"></span>
+                                <img th:src="@{${'http://openweathermap.org/img/w/' 
+                                + data.weather[0].get('icon') + '.png'}}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div th:if="${#lists.isEmpty(zips)}">
+                <h2 style="text-align: center;">No Recent Searches</h2>
+              </div>
+
+              <div th:unless="${#lists.isEmpty(zips)}">
+                <h2>Recent Searches</h2>
+                <div class="list-group" th:each="zip:${zips}">
+                    <div class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1" style="color: rgb(110, 162, 5)"> <span th:text="${zip}"></span> </h5>	
+                        </div>
+                            
+                    </div>
+                </div>
+            </div>
+      </div>
+
+
+
+        </div>
 
 </body>
 
